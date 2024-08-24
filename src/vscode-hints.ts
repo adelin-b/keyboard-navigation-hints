@@ -392,11 +392,7 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
     ".active .cursor-block-style"
   );
 
-  if (
-    isInsertMode ||
-    document.activeElement?.tagName === "INPUT" ||
-    document.activeElement?.tagName === "TEXTAREA"
-  ) {
+  if (isInsertMode) {
     return;
   }
 
