@@ -27,10 +27,11 @@ The keyboard navigation hints will be active after reloading.
 
 This is a first release, a few things are not working yet and PR are welcomes.
 
+- Cannot configure the shortcut or style, will fork https://marketplace.visualstudio.com/items?itemName=BrandonKirbyson.vscode-animations as the owner developped a way to configure the inject script (which is not a normal extension script that can access the vscode api)
 - Cannot open the dropdowns "..." on top right.
 - Cannot open a tab in the tab bar.
 - Cannot open detected links.
-- Cannot configure the shortcut or style
+
 
 ## Release Notes
 
