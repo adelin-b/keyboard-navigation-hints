@@ -240,14 +240,31 @@ const KeyboardHintsSystem = (() => {
       } else if (element.tagName.toLowerCase() === "select") {
         (element as HTMLSelectElement).focus();
       } else {
-        // TODO focus the element
-        // TODO handle the links
+        // Focus the element
+        element.focus();
+
+        // Simulate mousedown and click events
+        const mousedownEvent = new MouseEvent("mousedown", {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+        });
+        element.dispatchEvent(mousedownEvent);
+
         const clickEvent = new MouseEvent("click", {
           view: window,
           bubbles: true,
           cancelable: true,
         });
         element.dispatchEvent(clickEvent);
+
+        // Handle links
+        if (
+          element.tagName.toLowerCase() === "a" &&
+          (element as HTMLAnchorElement).href
+        ) {
+          window.location.href = (element as HTMLAnchorElement).href;
+        }
       }
 
       if (
@@ -353,12 +370,35 @@ const KeyboardHintsSystem = (() => {
 
 // Initial setup
 document.addEventListener("keydown", (event: KeyboardEvent) => {
-  // If the cursor-line-style element exists, dont do anything
-  if (document.querySelector(".active .cursor-line-style")) {
-    console.log("Not showing hints");
+  // is in vim insert mode
+  const statusBarItem = document.querySelector("#vscodevim\\.vim\\.primary");
+  const isInsertMode =
+    statusBarItem &&
+    statusBarItem.textContent?.includes("INSERT") &&
+    // Insert can be visible, but the active element is outside of the editor
+    document.activeElement?.parentElement?.parentElement?.classList.contains(
+      "monaco-editor"
+    );
+
+  // There is a line cursor in the active editor and its visible
+  const cursorLineStyle =
+    (
+      document
+        .querySelector(".active .cursor-line-style")
+        ?.querySelector(".cursor") as HTMLElement
+    )?.style.visibility !== "hidden";
+  // There is a visible block cursor
+  const cursorBlockStyle = document.querySelector(
+    ".active .cursor-block-style"
+  );
+
+  if (
+    isInsertMode ||
+    document.activeElement?.tagName === "INPUT" ||
+    document.activeElement?.tagName === "TEXTAREA"
+  ) {
     return;
   }
-  console.log("Showing hints");
 
   if (event.ctrlKey && event.code === "Space") {
     event.preventDefault();
