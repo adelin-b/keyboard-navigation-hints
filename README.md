@@ -1,28 +1,41 @@
-# ext-name
+# Keyboard navigation hints (Beta)
 
-<a href="https://marketplace.visualstudio.com/items?itemName=antfu.ext-name" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/antfu.ext-name.svg?color=eee&amp;label=VS%20Code%20Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
-<a href="https://kermanx.github.io/reactive-vscode/" target="__blank"><img src="https://img.shields.io/badge/made_with-reactive--vscode-%23007ACC?style=flat&labelColor=%23229863"  alt="Made with reactive-vscode" /></a>
+This extension adds keyboard navigation hints to VSCode.
 
-## Configurations
+## Requirements
 
-<!-- configs -->
-<!-- empty -->
-<!-- configs -->
+:warning: You absolutely need to have the [APC](https://github.com/drcika/apc-extension) extension installed to use this extension. You can use others custom scripts loader, but this one is the most advanced.
 
-## Commands
+And also you need to have VSCode Vim installed
 
-<!-- commands -->
-<!-- empty -->
-<!-- commands -->
+## Features
 
-## Sponsors
+Keyboard navigation hints
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.png'/>
-  </a>
-</p>
+To enable the feature:
 
-## License
+1. Make sure you have the [APC](https://github.com/drcika/apc-extension) extension installed.
+2. Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P on Mac).
+3. Type "Enable Keyboard Navigation Hints" and select the command.
+4. Reload VSCode.
 
-[MIT](./LICENSE.md) License © 2022 [Anthony Fu](https://github.com/antfu)
+Now you can use <kbd>Ctrl</kbd>+<kbd>Space</kbd> to toggle the hints. :warning: This short cut is not configurable. It will be in the future. It wont work from inside input or when in EDIT mode.
+
+The keyboard navigation hints will be active after reloading.
+
+## Known Issues
+
+This is a first release, a few things are not working yet and PR are welcomes.
+
+- Cannot open the dropdowns "..." on top right.
+- Cannot open a tab in the tab bar.
+- Cannot open detected links.
+- Cannot configure the shortcut or style
+
+## Release Notes
+
+Users appreciate release notes as you update your extension.
+
+### 0.0.1
+
+Initial release of keyboard navigation hints.

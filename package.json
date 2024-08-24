@@ -1,77 +1,66 @@
 {
-  "publisher": "antfu",
-  "name": "ext-name",
-  "displayName": "ext-name",
-  "version": "0.0.0",
-  "private": true,
-  "packageManager": "pnpm@9.7.1",
-  "description": "",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/ext-name#readme",
+  "name": "keyboard-navigation-hints",
+  "displayName": "keyboard-navigation-hints",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/ext-name"
+    "url": "https://github.com/adelin-b/keyboard-navigation-hints"
   },
-  "bugs": {
-    "url": "https://github.com/antfu/ext-name/issues"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/antfu"
-  },
-  "categories": [
-    "Other"
-  ],
-  "main": "./dist/index.js",
-  "icon": "res/icon.png",
-  "files": [
-    "LICENSE.md",
-    "dist/*",
-    "res/*"
-  ],
+  "publisher": "adelinb",
+  "description": "",
+  "version": "0.0.1",
   "engines": {
     "vscode": "^1.92.0"
   },
-  "activationEvents": [
-    "onStartupFinished"
+  "categories": [
+    "Keymaps"
   ],
+  "extensionDependencies": [
+    "drcika.apc-extension"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
   "contributes": {
-    "commands": [],
-    "configuration": {
-      "type": "object",
-      "title": "ext-name",
-      "properties": {}
-    }
+    "commands": [
+      {
+        "command": "keyboard-navigation-hints.enable",
+        "title": "Enable Keyboard Navigation Hints"
+      },
+      {
+        "command": "keyboard-navigation-hints.disable",
+        "title": "Disable Keyboard Navigation Hints"
+      }
+    ]
   },
   "scripts": {
-    "build": "tsup src/index.ts --external vscode",
-    "dev": "nr build --watch",
-    "prepare": "nr update",
-    "update": "vscode-ext-gen --output src/generated/meta.ts",
-    "lint": "eslint .",
-    "vscode:prepublish": "nr build",
-    "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "release": "bumpp && nr publish"
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "watch:tsc-web": "tsc --noEmit --watch --project tsconfig.web.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test",
+    "publish": "pnpm vsce publish --no-dependencies"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.26.0",
-    "@antfu/ni": "^0.22.4",
-    "@types/node": "^22.4.1",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
     "@types/vscode": "^1.92.0",
-    "@vscode/vsce": "^3.0.0",
-    "bumpp": "^9.5.1",
-    "eslint": "^9.9.0",
-    "esno": "^4.7.0",
-    "pnpm": "^9.7.1",
-    "reactive-vscode": "^0.2.0",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.1",
-    "vitest": "^2.0.5",
-    "vscode-ext-gen": "^0.4.1"
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@vscode/vsce": "^3.0.0"
   }
 }
