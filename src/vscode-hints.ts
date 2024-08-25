@@ -116,7 +116,7 @@ const KeyboardHintsSystem = (() => {
 
   function getClickableElements(): HTMLElement[] {
     const selector = `
-             button, select, input, .clickable, .monaco-dropdown,
+            a, button, select, input, .clickable, .monaco-dropdown,
 			[role="button"], [role="checkbox"], [role="radio"],
             [role="tab"], [role="menuitem"], [role="option"],
             [role="switch"], [contenteditable="true"],
