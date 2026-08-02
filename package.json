@@ -20,6 +20,26 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Keyboard Navigation Hints",
+      "properties": {
+        "keyboard-navigation-hints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable keyboard navigation hints."
+        },
+        "keyboard-navigation-hints.characters": {
+          "type": "string",
+          "default": "asdfgqwertzxcvb",
+          "description": "Characters used for hints."
+        },
+        "keyboard-navigation-hints.shortcut": {
+          "type": "string",
+          "default": "ctrl+space",
+          "description": "Keyboard shortcut to toggle hints."
+        }
+      }
+    },
     "commands": [
       {
         "command": "keyboard-navigation-hints.enable",
